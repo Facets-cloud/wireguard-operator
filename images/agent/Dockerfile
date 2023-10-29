@@ -17,7 +17,8 @@ COPY pkg/ pkg/
 COPY cmd/ cmd/
 COPY internal/iptables internal/iptables
 # build
-ARG TARGETOS TARGETARCH
+ARG TARGETOS
+ARG TARGETARCH
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o agent -x cmd/agent/main.go
 # end of step 1
 
