@@ -21,9 +21,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"time"
+
 	"github.com/jodevsa/wireguard-operator/pkg/agent"
 	"github.com/jodevsa/wireguard-operator/pkg/api/v1alpha1"
-	"time"
 
 	"github.com/korylprince/ipnetgen"
 	wgtypes "golang.zx2c4.com/wireguard/wgctrl/wgtypes"
@@ -733,6 +734,9 @@ func (r *WireguardReconciler) deploymentForWireguard(m *v1alpha1.Wireguard) *app
 					Labels: ls,
 				},
 				Spec: corev1.PodSpec{
+					Affinity:     m.Spec.DeploymentAffinity,
+					NodeSelector: m.Spec.DeploymentNodeSelector,
+					Tolerations:  m.Spec.DeploymentTolerations,
 					Volumes: []corev1.Volume{
 						{
 							Name: "socket",

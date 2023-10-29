@@ -22,6 +22,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"k8s.io/api/core/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -300,6 +301,25 @@ func (in *WireguardSpec) DeepCopyInto(out *WireguardSpec) {
 		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
 			(*out)[key] = val
+		}
+	}
+	if in.DeploymentAffinity != nil {
+		in, out := &in.DeploymentAffinity, &out.DeploymentAffinity
+		*out = new(v1.Affinity)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeploymentNodeSelector != nil {
+		in, out := &in.DeploymentNodeSelector, &out.DeploymentNodeSelector
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
+	if in.DeploymentTolerations != nil {
+		in, out := &in.DeploymentTolerations, &out.DeploymentTolerations
+		*out = make([]v1.Toleration, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 }

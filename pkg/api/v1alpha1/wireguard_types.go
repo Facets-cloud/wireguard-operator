@@ -49,6 +49,10 @@ type WireguardSpec struct {
 	NodePort int32 `json:"port,omitempty"`
 	// A map of key value strings for service annotations
 	ServiceAnnotations map[string]string `json:"serviceAnnotations,omitempty"`
+	// A map of key value for deployment template configuration
+	DeploymentAffinity     *corev1.Affinity    `json:"deploymentAffinity,omitempty"`
+	DeploymentNodeSelector map[string]string   `json:"deploymentNodeSelector,omitempty"`
+	DeploymentTolerations  []corev1.Toleration `json:"deploymentTolerations,omitempty"`
 	// A boolean field that specifies whether IP forwarding should be enabled on the Wireguard VPN pod at startup. This can be useful to enable if the peers are having problems with sending traffic to the internet.
 	EnableIpForwardOnPodInit bool `json:"enableIpForwardOnPodInit,omitempty"`
 }
