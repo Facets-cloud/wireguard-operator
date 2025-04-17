@@ -9,8 +9,8 @@ on:
 
 env:
   REGISTRY: facetscloud
-  AGENT_IMAGE_NAME: wireguard-operator-agent
-  MANAGER_IMAGE_NAME: wireguard-operator-manager
+  AGENT_IMAGE_NAME: facets-wireguard-operator-agent
+  MANAGER_IMAGE_NAME: facets-wireguard-operator-manager
 
 jobs:
   build-and-push:
